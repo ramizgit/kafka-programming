@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package exchange_message_def;
+
+option java_package = "com.kafka.message";
+option java_outer_classname = "ExchangeProtoMessage";
+option optimize_for = SPEED;
+
+message ProtMessage {
+  optional int32 id = 1;
+  optional string name = 2;
+}
