@@ -1,0 +1,15 @@
+{
+  "namespace": "com.kafka.message",
+  "type": "record",
+  "name": "AvroMessage",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}
