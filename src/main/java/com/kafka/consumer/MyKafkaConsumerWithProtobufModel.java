@@ -1,7 +1,7 @@
 package com.kafka.consumer;
 
-import com.kafka.model.KafkaMessage;
-import com.kafka.model.ModelDeserializer;
+import com.kafka.message.ExchangeProtoMessage.ProtMessage;
+import com.kafka.model.ProtMessageDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class MyKafkaConsumerWithModel {
+public class MyKafkaConsumerWithProtobufModel {
 
     public static void main(String[] args) {
 
@@ -20,15 +20,15 @@ public class MyKafkaConsumerWithModel {
         props.setProperty("group.id", "test");
         props.setProperty("enable.auto.commit", "true");
         props.setProperty("auto.commit.interval.ms", "1000");
-       
-        KafkaConsumer<Integer, KafkaMessage> consumer = new KafkaConsumer<>(props, new IntegerDeserializer(), new ModelDeserializer());
+        
+        KafkaConsumer<Integer, ProtMessage> consumer = new KafkaConsumer<>(props, new IntegerDeserializer(), new ProtMessageDeserializer());
         consumer.subscribe(Arrays.asList("myFirstTopic"));
 
 
         while (true) {
-            ConsumerRecords<Integer, KafkaMessage> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<Integer, ProtMessage> records = consumer.poll(Duration.ofMillis(100));
 
-            for (ConsumerRecord<Integer, KafkaMessage> record : records) {
+            for (ConsumerRecord<Integer, ProtMessage> record : records) {
                 System.out.println("Received message: (" + record.key() + ", " + record.value().toString() + ") at offset " + record.offset());
             }
         }

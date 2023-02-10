@@ -1,12 +1,15 @@
 package com.kafka.producer;
 
+import com.kafka.message.ExchangeProtoMessage.ProtMessage;
+import com.kafka.model.ProtMessageSerializer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.IntegerSerializer;
 
 import java.util.Properties;
 
-public class MyKafkaProducer {
+public class MyKafkaProducerWithProtobufModel {
 
     public static void main(String[] args) {
 
@@ -15,11 +18,11 @@ public class MyKafkaProducer {
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
 
-        Producer<String, String> producer = new KafkaProducer<String, String>(props);
+        Producer<Integer, ProtMessage> producer = new KafkaProducer<>(props, new IntegerSerializer(), new ProtMessageSerializer());
         for (int i = 31; i <= 40; i++){
-            producer.send(new ProducerRecord<String, String>("myFirstTopic", 1, Integer.toString(i), Integer.toString(i)));
+            producer.send(new ProducerRecord<>("myFirstTopic", 0, i, ProtMessage.newBuilder().setId(i).setName(i + "proto value").build()));
         }
-            
+
         producer.close();
     }
 }
