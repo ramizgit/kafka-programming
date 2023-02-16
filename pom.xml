@@ -86,14 +86,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Protocol Buffers -->
+        <!-- Protocol Buffers dependency -->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>3.21.11</version>
         </dependency>
 
-        <!-- avro -->
+        <!-- avro dependency -->
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
