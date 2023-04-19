@@ -26,11 +26,11 @@ public class MyKafkaConsumerGroup {
         TopicPartition p2 = new TopicPartition("myFirstTopic", 1);
         TopicPartition p3 = new TopicPartition("myFirstTopic", 3);
 
-        //consumer1 1
+        //consumer1
         KafkaConsumer consumer1 = new KafkaConsumer(props);
         consumer1.assign(Arrays.asList(p1, p2));
 
-        //consumer1 2
+        //consumer2
         KafkaConsumer consumer2 = new KafkaConsumer(props);
         consumer2.assign(Arrays.asList(p2, p3));
 
@@ -40,7 +40,7 @@ public class MyKafkaConsumerGroup {
 
             while (iterator.hasNext()){
                 ConsumerRecord record = (ConsumerRecord) iterator.next();
-                System.out.printf("consumer1111111111 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+                System.out.printf("consumer1 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
             }
 
             ConsumerRecords records2 = consumer2.poll(Duration.ofMillis(100));
@@ -48,7 +48,7 @@ public class MyKafkaConsumerGroup {
 
             while (iterator2.hasNext()){
                 ConsumerRecord record = (ConsumerRecord) iterator2.next();
-                System.out.printf("consumer2222222222 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+                System.out.printf("consumer2 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
             }
         }
     }
