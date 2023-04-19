@@ -20,12 +20,11 @@ public class KafkaConsumerGroupExample {
         props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
-
-        //consumer1 1
+        //consumer 1
         KafkaConsumer consumer1 = new KafkaConsumer(props);
         consumer1.subscribe(Arrays.asList("myFirstTopic"));
 
-        //consumer1 2
+        //consumer 2
         KafkaConsumer consumer2 = new KafkaConsumer(props);
         consumer2.subscribe(Arrays.asList("myFirstTopic"));
 
@@ -38,7 +37,7 @@ public class KafkaConsumerGroupExample {
 
             while (iterator.hasNext()){
                 ConsumerRecord record = (ConsumerRecord) iterator.next();
-                System.out.printf("consumer1111111111 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+                System.out.printf("consumer1 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
             }
 
             ConsumerRecords records2 = consumer2.poll(Duration.ofMillis(100));
@@ -46,7 +45,7 @@ public class KafkaConsumerGroupExample {
 
             while (iterator2.hasNext()){
                 ConsumerRecord record = (ConsumerRecord) iterator2.next();
-                System.out.printf("consumer2222222222 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+                System.out.printf("consumer2 offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
             }
         }
     }
