@@ -24,7 +24,6 @@ public class MyKafkaConsumerWithProtobufModel {
         KafkaConsumer<Integer, ProtMessage> consumer = new KafkaConsumer<>(props, new IntegerDeserializer(), new ProtMessageDeserializer());
         consumer.subscribe(Arrays.asList("myFirstTopic"));
 
-
         while (true) {
             ConsumerRecords<Integer, ProtMessage> records = consumer.poll(Duration.ofMillis(100));
 
